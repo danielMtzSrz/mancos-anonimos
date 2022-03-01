@@ -7,7 +7,10 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "tw:build": "tailwindcss -i ./resources/css/app.css -o ./public/css/app.css --watch",
+        "tw:dev": "tailwindcss -o tailwind.css --watch",
+        "build": "npx tailwindcss -i ./resources/css/app.css -o ./public/css/app.css"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.4.0",

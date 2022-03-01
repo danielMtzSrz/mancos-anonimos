@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Videojuego extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nombre_videojuego', 'clasificacion', 'consola', 'precio_adquisicion'
+    ];
 }

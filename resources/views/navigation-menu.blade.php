@@ -2,20 +2,15 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
+            <div class="flex w-full">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center bg-red-200 w-4/12">
+                <div class="shrink-0 flex">
                     <a href="{{ route('dashboard') }}">
                         <img src="{{ asset('img/logo.svg') }}" alt="No se encontró" width="65" height="65">
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
-                        {{ __('Menú principal') }}
-                    </x-jet-nav-link>
-                </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('videojuegos.index') }}" :active="request()->routeIs('videojuegos.index')">
                         {{ __('Videojuegos') }}
