@@ -22,14 +22,16 @@ class VideojuegoController extends Controller{
             'nombre_videojuego' => ['required', 'unique:videojuegos'],
             'clasificacion' => ['required'],
             'consola' => ['required'],
-            'precio_adquisicion' => ['required']
+            'precio_adquisicion' => ['required'],
+            'precio_venta' => ['required']
         ]);
 
         $guardarInformacionExtra = Videojuego::create([
             'nombre_videojuego' => $request->input('nombre_videojuego'),
             'clasificacion' => $request->input('clasificacion'),
             'consola' => $request->input('consola'),
-            'precio_adquisicion' => $request->input('precio_adquisicion')
+            'precio_adquisicion' => $request->input('precio_adquisicion'),
+            'precio_venta' => $request->input('precio_venta')
         ]);
 
         return redirect()->route('videojuegos.index')->with('status', 'Registro almacenado con éxito');
@@ -47,10 +49,11 @@ class VideojuegoController extends Controller{
     public function update(Request $request, $id){
 
         $request->validate([
-            'nombre_videojuego' => ['required', 'unique:videojuegos'],
+            'nombre_videojuego' => ['required'],
             'clasificacion' => ['required'],
             'consola' => ['required'],
-            'precio_adquisicion' => ['required']
+            'precio_adquisicion' => ['required'],
+            'precio_venta' => ['required']
         ]);
 
         $videojuego = Videojuego::find($id);
@@ -58,9 +61,10 @@ class VideojuegoController extends Controller{
             'nombre_videojuego' => $request->input('nombre_videojuego'),
             'clasificacion' => $request->input('clasificacion'),
             'consola' => $request->input('consola'),
-            'precio_adquisicion' => $request->input('precio_adquisicion')
+            'precio_adquisicion' => $request->input('precio_adquisicion'),
+            'precio_venta' => $request->input('precio_venta')
         ]);
-        return back()->with('status', 'Registro modificado con éxito');
+        return redirect()->route('videojuegos.index')->with('status', 'Registro modificado con éxito');
     }
 
     public function destroy($id){

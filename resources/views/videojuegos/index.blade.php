@@ -42,6 +42,9 @@ Videojuegos
             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Precio adquisición
             </th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Precio venta
+            </th>
             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left"></th>
         </tr>
     </thead>
@@ -53,6 +56,7 @@ Videojuegos
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $videojuego->clasificacion }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $videojuego->consola }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ number_format($videojuego->precio_adquisicion, 2) }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ number_format($videojuego->precio_venta, 2) }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 flex space-x-2 w-auto">
                 <a href="{{ route('videojuegos.edit', $videojuego->id) }}"
                     class="bg-amber-400 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-full transform hover:-translate-y-1 hover:scale-110">

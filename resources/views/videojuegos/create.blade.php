@@ -45,13 +45,15 @@ Videojuegos - Nuevo
     <form class="w-full max-w-lg" action="{{ route('videojuegos.store') }}" method="POST">
         @csrf
         <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div class="w-full md:w-3/4 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                     Nombre del videojuego
                 </label>
                 <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="nombre_videojuego" name="nombre_videojuego" type="text" placeholder="Nombre del videojuego">
             </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full md:w-1/2 px-3">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                     Clasificación
@@ -60,8 +62,6 @@ Videojuegos - Nuevo
                     class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="clasificacion" name="clasificacion" type="text" placeholder="Clasificación Ejemplo">
             </div>
-        </div>
-        <div class="flex flex-wrap -mx-3 mb-6">
             <div class="md:w-1/2 px-3">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                     Consola
@@ -73,6 +73,8 @@ Videojuegos - Nuevo
                     @endforeach
                 </select>
             </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
                     Precio de adquisición
@@ -80,6 +82,14 @@ Videojuegos - Nuevo
                 <input
                     class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="precio_adquisicion" name="precio_adquisicion" type="number" placeholder="0.00">
+            </div>
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+                    Precio de venta
+                </label>
+                <input
+                    class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="precio_adquisicion" name="precio_venta" type="number" placeholder="0.00">
             </div>
         </div>
         <div class="w-full flex justify-end items-center">

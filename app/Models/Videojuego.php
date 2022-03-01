@@ -10,6 +10,6 @@ class Videojuego extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre_videojuego', 'clasificacion', 'consola', 'precio_adquisicion'
+        'nombre_videojuego', 'clasificacion', 'consola', 'precio_adquisicion', 'precio_venta'
     ];
 }

@@ -46,13 +46,15 @@ Videojuegos - Modificar
         @method('PUT')
         @csrf
         <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div class="w-full md:w-3/4 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                     Nombre del videojuego
                 </label>
                 <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="nombre_videojuego" name="nombre_videojuego" type="text" placeholder="Nombre del videojuego" value="{{ old('nombre_videojuego', $videojuego->nombre_videojuego) }}" required>
             </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full md:w-1/2 px-3">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                     Clasificación
@@ -61,8 +63,6 @@ Videojuegos - Modificar
                     class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="clasificacion" name="clasificacion" type="text" placeholder="Clasificación Ejemplo" value="{{ old('clasificacion', $videojuego->clasificacion) }}">
             </div>
-        </div>
-        <div class="flex flex-wrap -mx-3 mb-6">
             <div class="md:w-1/2 px-3">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                     Consola
@@ -78,6 +78,8 @@ Videojuegos - Modificar
                     @endforeach
                 </select>
             </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
                     Precio de adquisición
@@ -85,6 +87,14 @@ Videojuegos - Modificar
                 <input
                     class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="precio_adquisicion" name="precio_adquisicion" type="number" placeholder="0.00" value="{{ old('precio_adquisicon', $videojuego->precio_adquisicion) }}">
+            </div>
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+                    Precio de venta
+                </label>
+                <input
+                    class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="precio_venta" name="precio_venta" type="number" placeholder="0.00" value="{{ old('precio_adquisicon', $videojuego->precio_venta) }}">
             </div>
         </div>
         <div class="w-full flex justify-end items-center">

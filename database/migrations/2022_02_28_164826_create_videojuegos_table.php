@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('clasificacion');
             $table->string('consola');
             $table->float('precio_adquisicion');
+            $table->float('precio_venta');
             $table->timestamps();
         });
     }
