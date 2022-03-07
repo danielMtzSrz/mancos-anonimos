@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Videojuego;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use App\Events\ProjectSaved;
 
 class VideojuegoController extends Controller{
 
@@ -23,16 +26,26 @@ class VideojuegoController extends Controller{
             'clasificacion' => ['required'],
             'consola' => ['required'],
             'precio_adquisicion' => ['required'],
-            'precio_venta' => ['required']
+            'precio_venta' => ['required'],
+            'imagen' => [
+                $this->route('id') ? 'nullable' :'required',
+                'image'
+            ]
         ]);
 
-        $guardarInformacionExtra = Videojuego::create([
+        $guardarVideojuego = new Videojuego([
             'nombre_videojuego' => $request->input('nombre_videojuego'),
             'clasificacion' => $request->input('clasificacion'),
             'consola' => $request->input('consola'),
             'precio_adquisicion' => $request->input('precio_adquisicion'),
             'precio_venta' => $request->input('precio_venta')
         ]);
+
+        $guardarVideojuego->image = $request->file('imagen')->store('images', 'public');
+        $guardarVideojuego->save();
+
+        // Disparar un evento ProjectCreated
+        ProjectSaved::dispatch($guardarVideojuego);
 
         return redirect()->route('videojuegos.index')->with('status', 'Registro almacenado con éxito');
     }
@@ -57,18 +70,36 @@ class VideojuegoController extends Controller{
         ]);
 
         $videojuego = Videojuego::find($id);
-        $videojuego->update([
-            'nombre_videojuego' => $request->input('nombre_videojuego'),
-            'clasificacion' => $request->input('clasificacion'),
-            'consola' => $request->input('consola'),
-            'precio_adquisicion' => $request->input('precio_adquisicion'),
-            'precio_venta' => $request->input('precio_venta')
-        ]);
+
+        if($request->hasFile('imagen')){
+            Storage::disk('public')->delete($videojuego->image);
+            // Fill -> Va a rellenar todos los campos sin guardarlos en la BD
+            $videojuego->fill(array_filter([
+                'nombre_videojuego' => $request->input('nombre_videojuego'),
+                'clasificacion' => $request->input('clasificacion'),
+                'consola' => $request->input('consola'),
+                'precio_adquisicion' => $request->input('precio_adquisicion'),
+                'precio_venta' => $request->input('precio_venta')
+            ]));
+            $videojuego->image = $request->file('imagen')->store('images', 'public');
+            $videojuego->save();
+
+            ProjectSaved::dispatch($videojuego);
+        }else{
+            $videojuego->update(array_filter([
+                'nombre_videojuego' => $request->input('nombre_videojuego'),
+                'clasificacion' => $request->input('clasificacion'),
+                'consola' => $request->input('consola'),
+                'precio_adquisicion' => $request->input('precio_adquisicion'),
+                'precio_venta' => $request->input('precio_venta')
+            ]));
+        }
         return redirect()->route('videojuegos.index')->with('status', 'Registro modificado con éxito');
     }
 
     public function destroy($id){
         $videojuego = Videojuego::find($id);
+        Storage::disk('public')->delete($videojuego->image);
         $videojuego->delete();
         return back()->with('status', 'Eliminado con éxito');
     }
