@@ -4,13 +4,6 @@
 Videojuegos - Modificar
 @endsection
 
-@php
-    $consolas = ['XBOX' => 'Xbox',
-                'PS' => 'Play Station',
-                'PC' => 'PC',
-                'Celular' => 'Celular'];
-@endphp
-
 @section('content')
 @if (session('status'))
     <div class="flex justify-center items-center py-4 hover:hidden">
@@ -67,13 +60,13 @@ Videojuegos - Modificar
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                     Consola
                 </label>
-                <select class="block appearance-none w-full bg-gray-50 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" name="consola" id="consola">
+                <select class="block appearance-none w-full bg-gray-50 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" name="tipo_consola_id" id="tipo_consola_id">
                     <option value="">Seleccionar...</option>
-                    @foreach($consolas as $key => $value)
-                        @if($videojuego->consola == $key)
-                            <option value="{{ $key }}" selected>{{ $value }}</option>
+                    @foreach($tipo_consola as $value)
+                        @if($videojuego->tipo_consola_id == $value->id)
+                            <option value="{{ $value->id }}" selected>{{ $value->nombre_consola }}</option>
                         @else
-                            <option value="{{ $key }}">{{ $value }}</option>
+                            <option value="{{ $value->id }}">{{ $value->nombre_consola }}</option>
                         @endif
                     @endforeach
                 </select>

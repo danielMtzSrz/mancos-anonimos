@@ -14,19 +14,13 @@ return new class extends Migration{
         });
 
         Schema::table('videojuegos', function(Blueprint $table){
-            $table->unsignedBigInteger('id_tipo_consola')->nullable()->after('id');
+            $table->foreignId('tipo_consola_id')->nullable()->after('id');
 
-            $table->foreign('id_tipo_consola')->references('id')->on('tipo_consolas')
-                    ->onUpdate('cascade')
-                    ->onDelete('set null');
+            $table->foreign('tipo_consola_id')->references('id')->on('tipo_consolas');
         });
     }
 
     public function down(){
-        Schema::table('videojuegos', function(Blueprint $table){
-            $table->dropForeign('videojuegos_id_tipo_consola_foreign');
-            $table->dropColumn('id_tipo_consola');
-        });
         Schema::dropIfExists('tipo_consolas');
     }
 };

@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('nombre_videojuego');
             $table->string('clasificacion');
-            $table->string('consola');
             $table->float('precio_adquisicion');
             $table->float('precio_venta');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

@@ -58,7 +58,7 @@ Videojuegos
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $videojuego->id }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $videojuego->nombre_videojuego }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $videojuego->clasificacion }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $videojuego->consola }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $videojuego->tipo_consola_id }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ number_format($videojuego->precio_adquisicion, 2) }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ number_format($videojuego->precio_venta, 2) }}</td>
                 @if($videojuego->image)

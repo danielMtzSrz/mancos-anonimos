@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Videojuego;
+use App\Models\{Videojuego, TipoConsola};
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use App\Events\ProjectSaved;
@@ -11,12 +11,13 @@ use App\Events\ProjectSaved;
 class VideojuegoController extends Controller{
 
     public function index(){
-        $videojuegos = Videojuego::all();
+        $videojuegos = Videojuego::get();
         return view('videojuegos.index', compact('videojuegos'));
     }
 
     public function create(){
-        return view('videojuegos.create');
+        $tipo_consola = TipoConsola::get();
+        return view('videojuegos.create', compact('tipo_consola'));
     }
 
     public function store(Request $request){
@@ -24,19 +25,14 @@ class VideojuegoController extends Controller{
         $request->validate([
             'nombre_videojuego' => ['required', 'unique:videojuegos'],
             'clasificacion' => ['required'],
-            'consola' => ['required'],
             'precio_adquisicion' => ['required'],
             'precio_venta' => ['required'],
-            'imagen' => [
-                $this->route('id') ? 'nullable' :'required',
-                'image'
-            ]
         ]);
 
         $guardarVideojuego = new Videojuego([
+            'tipo_consola_id' => $request->input('tipo_consola_id'),
             'nombre_videojuego' => $request->input('nombre_videojuego'),
             'clasificacion' => $request->input('clasificacion'),
-            'consola' => $request->input('consola'),
             'precio_adquisicion' => $request->input('precio_adquisicion'),
             'precio_venta' => $request->input('precio_venta')
         ]);
@@ -55,8 +51,9 @@ class VideojuegoController extends Controller{
     }
 
     public function edit($id){
+        $tipo_consola = TipoConsola::get();
         $videojuego = Videojuego::find($id);
-        return view('videojuegos.update', compact('videojuego'));
+        return view('videojuegos.update', compact('videojuego'), compact('tipo_consola'));
     }
 
     public function update(Request $request, $id){
@@ -64,7 +61,6 @@ class VideojuegoController extends Controller{
         $request->validate([
             'nombre_videojuego' => ['required'],
             'clasificacion' => ['required'],
-            'consola' => ['required'],
             'precio_adquisicion' => ['required'],
             'precio_venta' => ['required']
         ]);
@@ -75,6 +71,7 @@ class VideojuegoController extends Controller{
             Storage::disk('public')->delete($videojuego->image);
             // Fill -> Va a rellenar todos los campos sin guardarlos en la BD
             $videojuego->fill(array_filter([
+                'tipo_consola_id' => $request->input('tipo_consola_id'),
                 'nombre_videojuego' => $request->input('nombre_videojuego'),
                 'clasificacion' => $request->input('clasificacion'),
                 'consola' => $request->input('consola'),
